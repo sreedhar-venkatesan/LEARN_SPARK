@@ -22,8 +22,9 @@ def spark_df():
     All spark related commands
     """
     spark = SparkSession.builder.appName('Practise').getOrCreate()
-    spark.read.csv(DOC_NAME, header=True, inferSchema=True).show()
-
+    df_pyspark = spark.read.csv(DOC_NAME, header=True, inferSchema=True)
+    df_pyspark.show()
+    df_pyspark.drop('Name').show()
 
 def main():
     """
