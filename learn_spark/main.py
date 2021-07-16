@@ -1,9 +1,11 @@
 """
-A place to learn pyspark"""
+A place to learn pyspark
+"""
 
 import os
 import pandas as pd
 from pyspark.sql import SparkSession
+from pyspark.ml.feature import Imputer
 
 CURR_DIR = os.path.abspath(os.path.dirname(__file__))
 DOC_NAME = os.path.join(CURR_DIR, '..', "docs", "employee_dataset.csv")
@@ -24,7 +26,11 @@ def spark_df():
     spark = SparkSession.builder.appName('Practise').getOrCreate()
     df_pyspark = spark.read.csv(DOC_NAME, header=True, inferSchema=True)
     df_pyspark.show()
-    df_pyspark.na.drop().show()
+    imputer = Imputer(
+        inputCols = ['Age', 'Experience', 'Salary'],
+        outputCols = ["{}_imputed".format(c) for c in ['age', 'Experience','Salary']]
+    ).setStrategy("mean")
+    imputer.fit(df_pyspark).transform(df_pyspark).show()
 
 def main():
     """
