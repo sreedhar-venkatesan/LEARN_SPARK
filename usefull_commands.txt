@@ -27,8 +27,10 @@ df_pyspark.na.fill('missing','column_name')
 df_pyspark.na.fill('missing',['column_name1, column_name2'])
 
 ## fill missing value using imputer
+# here mean of whole column possible median..
 from pyspark.ml.feature import Imputer
 imputer = Imputer(
     inputCols = ['Age', 'Experience', 'Salary'],
     outputCols = ["{}_imputed".format(c) for c in ['age', 'Experience','Salary']]
 ).setStrategy("mean")
+imputer.fit(df_pyspark).transform(df_pyspark).show()
