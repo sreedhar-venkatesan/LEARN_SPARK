@@ -1,4 +1,4 @@
-# Lear pyspark with me through the codes.
+# Learn pyspark with me through the codes.
 
 * Thanks to freecodecamp.org. This learning has been made possible by their youtube channel https://www.youtube.com/watch?v=_C8kWso4ne4
 * The datasets and code are created by myself following the syllabus and structure of freecodecamp
