@@ -1,0 +1,34 @@
+Usefull commands in pyspark
+
+# show all dataset from file
+df_pyspark.show()
+# all value in column 
+df_pyspark.column('column_name')
+
+### Handling missing values
+## Drop features
+# drop null value rows
+df_pyspark.na.drop()
+# if any value == null, default option
+df_pyspark.na.drop(how ='any')
+# if only all value in a row == null
+df_pyspark.na.drop(how = 'all')
+# keep a thrshold for how many null value (here atleast 2non na) can be accepted in a row
+df_pyspark.na.drop(how ='any', thresh = 2)
+# subset
+df_pyspark.na.drop(how ='any', subset = ['column_name'])
+
+## fill missing value basic
+# fill missing value with string missing
+df_pyspark.na.fill('missing')
+# fill missing value with string missing for a column
+df_pyspark.na.fill('missing','column_name')
+# fill missing value with string missing for multiple column
+df_pyspark.na.fill('missing',['column_name1, column_name2'])
+
+## fill missing value using imputer
+from pyspark.ml.feature import Imputer
+imputer = Imputer(
+    inputCols = ['Age', 'Experience', 'Salary'],
+    outputCols = ["{}_imputed".format(c) for c in ['age', 'Experience','Salary']]
+).setStrategy("mean")
