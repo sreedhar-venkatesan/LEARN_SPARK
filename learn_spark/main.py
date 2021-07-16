@@ -24,7 +24,7 @@ def spark_df():
     spark = SparkSession.builder.appName('Practise').getOrCreate()
     df_pyspark = spark.read.csv(DOC_NAME, header=True, inferSchema=True)
     df_pyspark.show()
-    df_pyspark.drop('Name').show()
+    df_pyspark.na.drop().show()
 
 def main():
     """
